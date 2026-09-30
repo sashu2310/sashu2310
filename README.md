@@ -18,8 +18,9 @@ Open source contributions:
 
 - Celery — Fixed unbounded memory leak in ETA task scheduling. Shipped in v5.6.0. [PR #9853](https://github.com/celery/celery/pull/9853)
 - Kombu — Added max_prefetch to QoS class, capping heap growth. Shipped in v5.6.0. [PR #2348](https://github.com/celery/kombu/pull/2348)
+- Celery — Made worker concurrency cgroup-aware with `--concurrency=auto`. Sizes the prefork pool from the CFS quota and CPU affinity mask instead of the host CPU count, so containers stop forking one process per host core. Shipping in v5.7. [PR #10328](https://github.com/celery/celery/pull/10328)
 
-Celery is downloaded 10M+ times/month. The fix affects every deployment using ETA/countdown tasks.
+Celery is downloaded 10M+ times/month. The leak fix affects every deployment using ETA/countdown tasks; the concurrency change every containerized worker.
 
 ---
 
